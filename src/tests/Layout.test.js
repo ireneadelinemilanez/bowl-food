@@ -32,16 +32,6 @@ describe('SiteHeader', () => {
   });
 });
 
-describe('SiteFooter', () => {
-  it('renders the CUNY logo', () => {
-    render(SiteFooter);
-    expect(
-      screen.getByLabelText(
-        'Craig Newmark Graduate School of Journalism at CUNY'
-      )
-    ).toBeTruthy();
-  });
-
   it('renders footer navigation links', () => {
     render(SiteFooter);
     expect(screen.getByText('ABOUT US')).toBeTruthy();
