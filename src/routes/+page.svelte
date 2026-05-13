@@ -6,54 +6,137 @@ This is your page!
   // Import all the news furniture components
   import ArticleHeader from '$lib/components/Article/ArticleHeader.svelte';
   import ArticleBody from '$lib/components/Article/ArticleBody.svelte';
-  import Blockquote from '$lib/components/Article/Blockquote.svelte';
   import Image from '$lib/components/Media/Image.svelte';
-  import RelatedLinks from '$lib/components/Article/RelatedLinks.svelte';
   import DropdownInput from '$lib/components/Forms/DropdownInput.svelte';
   import BigNumber from '$lib/components/Data/BigNumber.svelte';
   import Dashboard from '$lib/components/Data/Dashboard.svelte';
+  import HeaderImage from '$lib/components/Media/HeaderImage.svelte';
 
   // Get data from the load function
   let { data } = $props();
 
   // Create year options for the dropdown
   const yearOptions = $derived(
-    data.dataByYear.map((item) => ({
-      label: item.year.toString(),
-      value: item.year.toString(),
-    }))
+    data.dataByYear
+      .filter((item) => item.year >= 2019 && item.year <= 2025)
+      .map((item) => ({
+        label: item.year.toString(),
+        value: item.year.toString(),
+      }))
   );
 
-  // State for year selection (initialize to latest year)
+  // Restaurant options
+  const restaurantOptions = [
+    { label: 'Chipotle', value: 'chipotle' },
+    { label: 'Sweetgreen', value: 'sweetgreen' },
+    { label: 'Cava', value: 'cava' },
+  ];
+
+  // State for selections (initialize to latest year and Chipotle)
   let selectedYear = $state('2025');
+  let selectedRestaurant = $state('chipotle');
+
+  // Get the baseline (2018) data
+  const baselineData = $derived(
+    data.dataByYear.find((item) => item.year === 2018)
+  );
 
   // Get the selected year data
   const selectedData = $derived(
     data.dataByYear.find((item) => item.year === parseInt(selectedYear))
   );
 
+  // Calculate average order costs and price indices based on selected restaurant
+  const getRestaurantData = (yearData, restaurant) => {
+    if (!yearData) return { price: 0, zeroIndex: 0 };
+    if (restaurant === 'chipotle') {
+      return {
+        price: yearData.avgChipotle,
+        zeroIndex: yearData.chiptoleZeroIndex,
+      };
+    } else if (restaurant === 'sweetgreen') {
+      return {
+        price: yearData.avgSweetgreen,
+        zeroIndex: yearData.sweetgreenZeroIndex,
+      };
+    } else if (restaurant === 'cava') {
+      return {
+        price: yearData.avgCava,
+        zeroIndex: yearData.cavaZeroIndex,
+      };
+    }
+    return { price: 0, zeroIndex: 0 };
+  };
+
+  // Get baseline and current restaurant prices
+  const baselineRestaurant = $derived(
+    getRestaurantData(baselineData, selectedRestaurant)
+  );
+  const currentRestaurant = $derived(
+    getRestaurantData(selectedData, selectedRestaurant)
+  );
+
+  // Calculate how many 2018 bowls you could buy
+ function toFractionMax10(value) {
+  const whole = Math.floor(value);
+  const decimal = value - whole;
+
+  let bestNumerator = 0;
+  let bestDenominator = 1;
+  let smallestError = Infinity;
+
+  // Try denominators from 1 to 10
+  for (let denominator = 1; denominator <= 10; denominator++) {
+    const numerator = Math.round(decimal * denominator);
+    const approximation = numerator / denominator;
+    const error = Math.abs(decimal - approximation);
+
+    if (error < smallestError) {
+      smallestError = error;
+      bestNumerator = numerator;
+      bestDenominator = denominator;
+    }
+  }
+
+  // Simplify fraction
+  function gcd(a, b) {
+    return b ? gcd(b, a % b) : a;
+  }
+  
+  const divisor = gcd(bestNumerator, bestDenominator);
+
+  bestNumerator /= divisor;
+  bestDenominator /= divisor;
+
+  // Handle whole numbers
+  if (bestNumerator === 0) {
+    return `${whole}`;
+  }
+
+  // Handle improper carry-over
+  if (bestNumerator === bestDenominator) {
+    return `${whole + 1}`;
+  }
+
+  // Mixed number format
+  if (whole === 0) {
+    return `${bestNumerator}/${bestDenominator}`;
+  }
+
+  return `${whole} ${bestNumerator}/${bestDenominator}`;
+}
+  const bowlsIn2018 = $derived(
+  currentRestaurant.price > 0
+    ? toFractionMax10(
+        currentRestaurant.price / baselineRestaurant.price
+      )
+    : "4"
+);
+
   // Article metadata
   let headline = 'Slop bowls soar in price, outpacing income and inflation';
   let byline = 'Irene Adeline Milanez';
   let pubDate = '2026-01-31';
-
-  // Related stories
-  const relatedStories = [
-    {
-      headline:
-        "How America's top news organizations escape rigid publishing systems to design beautiful data-driven stories on deadline.",
-      href: 'https://palewi.re/docs/coding-the-news/',
-    },
-    {
-      headline:
-        'How to install, configure and use Visual Studio Code, GitHub and Copilot',
-      href: 'https://palewi.re/docs/coding-the-news/scripts/week-1/',
-    },
-    {
-      headline: 'How to publish a website with Node.JS and GitHub Actions',
-      href: 'https://palewi.re/docs/coding-the-news/scripts/week-2/',
-    },
-  ];
 </script>
 
 <!-- This sets the page title in the browser tab -->
@@ -66,41 +149,17 @@ This is your page!
 </svelte:head>
 
 <!-- Your page content goes here -->
+<HeaderImage
+  src="bowl.jpeg"
+  alt="New York City skyline at sunrise"
+  height="100vh"
+  >
+</HeaderImage>
+
 <div class="container">
   <!-- Article Header: Headline, byline, and publication date -->
+
   <ArticleHeader {headline} {byline} {pubDate} />  
-
-  <!-- Year Selector and Metrics Dashboard -->
-  <div class="metrics-section">
-    <h2>Cost of Living Comparison</h2>
-    <DropdownInput
-      options={yearOptions}
-      value={selectedYear}
-      label="Select Year"
-      placeholder="Choose a year…"
-      onchange={(e) => (selectedYear = e.target.value)}
-    />
-
-    {#if selectedData}
-      <Dashboard>
-        <BigNumber
-          number={selectedData.cpiZeroIndex.toFixed(2) + '%'}
-          label="CPI Away From Home"
-          footnote="% change from 2018"
-        />
-        <BigNumber
-          number={selectedData.houseZeroIndex.toFixed(2) + '%'}
-          label="Median Household Income"
-          footnote="% change from 2018"
-        />
-        <BigNumber
-          number={selectedData.chiptoleZeroIndex.toFixed(2) + '%'}
-          label="Chipotle Average Price"
-          footnote="% change from 2018"
-        />
-      </Dashboard>
-    {/if}
-  </div>
 
   <!-- Article Body: The main story text with proper typography -->
   <ArticleBody>
@@ -114,6 +173,60 @@ This is your page!
     </p>
     <p>Consumers strained by rising prices and economic uncertainty are cutting back on takeout lunches, particularly at fast casual chains like Chipotle, Sweetgreen and Cava. Gen Z  in particular appears to be pulling back. Spending growth at limited-service restaurants among younger consumers has dropped sharply, down 19 percentage points over the past two years, compared with an 11- to 12-point decline for older groups, according to a McKinsey report.
     </p>
+
+    <!-- Year Selector and Metrics Dashboard -->
+    <div class="metrics-section">
+    <h2>How much more expensive was your order?</h2>
+    
+    <div class="dropdown-row">
+      <DropdownInput
+        options={restaurantOptions}
+        value={selectedRestaurant}
+        label="Choose a restaurant"
+        placeholder="Select restaurant…"
+        onchange={(e) => (selectedRestaurant = e.target.value)}
+      />
+      <DropdownInput
+        options={yearOptions}
+        value={selectedYear}
+        label="Choose a year"
+        placeholder="Choose a year…"
+        onchange={(e) => (selectedYear = e.target.value)}
+      />
+    </div>
+
+    {#if selectedData && baselineRestaurant && currentRestaurant}
+      <div class="comparison-text">
+        <p>
+          <p>
+           In 2018, the average order cost <strong>${baselineRestaurant.price.toFixed(2)}</strong>. 
+           An order in {selectedYear} would cost <strong>${currentRestaurant.price.toFixed(2)}</strong>. 
+         {#if bowlsIn2018 != 1}
+          With that money you could have bought <strong>{bowlsIn2018}</strong> bowls in 2018.
+          {/if}
+        </p>
+      </div>
+
+      <Dashboard>
+        <BigNumber
+          number={currentRestaurant.zeroIndex.toFixed(2) + '%'}
+          label="Price increased"
+          footnote="since 2018"
+        />
+        <BigNumber
+          number={selectedData.cpiZeroIndex.toFixed(2) + '%'}
+          label="Prices for restaurant food went up"
+          footnote="since 2018"
+        />
+        <BigNumber
+          number={selectedData.houseZeroIndex.toFixed(2) + '%'}
+          label="Median household income increased"
+          footnote="since 2018"
+        />
+      </Dashboard>
+    {/if}
+    </div>
+
     <p>Fast casual restaurants sit between fast food and full-service dining, with higher ingredient quality and more labor-intensive operations than quick-service chains. That leaves them vulnerable to rising costs without the pricing flexibility or scale advantages of fast food chains, like McDonalds. In the past year, Sweetgreen stock has plummeted by 55.24% and Chipotle stock fell by 35.99%.
     </p>
     <p>U.S. consumers, already strained by post-pandemic inflation, high prices from tariffs and a weakening labor market, continue to be concerned about affordability.
@@ -130,12 +243,9 @@ This is your page!
     </p>
     <p>Trading down and substitutions are common consumer responses to rising prices across income groups, but not evenly. Declines in sales reveal the K-shaped direction of the U.S. economy, where wealthier Americans have increased their spending thanks to stock market gains, while lower-income households are struggling with the high cost of living and wages that aren’t keeping pace.
     </p>
-    <Image
-    src="/line-chart.png"
-    alt="The Craig Newmark Graduate School of Journalism is at 219 West 40th Street in Midtown Manhattan."
-    caption="The Craig Newmark Graduate School of Journalism is at 219 West 40th Street in Midtown Manhattan."
-    credit="Craig Newmark Graduate School of Journalism"
-    />
+    
+    <iframe title="Fast Casual Prices Outpace Income and Inflation" aria-label="Line chart" id="datawrapper-chart-iipPq" src="https://datawrapper.dwcdn.net/iipPq/1/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="537" data-external="1"></iframe><script type="text/javascript">window.addEventListener("message",function(a){if(void 0!==a.data["datawrapper-height"]){var e=document.querySelectorAll("iframe");for(var t in a.data["datawrapper-height"])for(var r,i=0;r=e[i];i++)if(r.contentWindow===a.source){var d=a.data["datawrapper-height"][t]+"px";r.style.height=d}}});</script>
+
     <p>Food prices have remained elevated with the average transaction price at Chipotle increasing by 50% since 2018. Overall, the consumer price index for restaurant and takeout meals rose about 38.6% over the past eight years, driven by higher labor, rent and ingredient costs, according to the U.S. Bureau of Labor Statistics. Yet, in the same time period, median household income only grew by 9.6%.
     </p>
     <p>Beef and other staples have seen particularly sharp increases in recent months. While many fast food chains now have automated ordering and payment, fast casual restaurants still rely on workers for food preparation and service. 
@@ -161,9 +271,6 @@ This is your page!
     <p>“People are feeling threatened. Their jobs are feeling threatened,” Zagor said. “There are people that have a mindset that says, ‘I shouldn't be very liberal in spending. I need to maintain my conservative spending.’ ”
     </p>
   </ArticleBody>
-
-  
-
 </div>
 
 <style lang="scss">
@@ -183,9 +290,40 @@ This is your page!
     }
   }
 
+  .dropdown-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .comparison-text {
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+    color: var(--color-dark);
+
+    p {
+      margin: 0;
+    }
+
+    strong {
+      color: var(--color-accent);
+      font-weight: var(--font-weight-bold);
+    }
+  }
+
   @include mobile {
     .metrics-section {
       padding: var(--spacing-md);
+    }
+
+    .comparison-text {
+      font-size: var(--font-size-base);
     }
   }
 </style>
