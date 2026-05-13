@@ -37,4 +37,3 @@ describe('SiteHeader', () => {
     expect(screen.getByText('ABOUT US')).toBeTruthy();
     expect(screen.getByText('CONTACT US')).toBeTruthy();
   });
-});
