@@ -23,6 +23,5 @@ USAGE EXAMPLE:
     font-family: var(--font-sans);
     font-size: var(--font-size-base);
     color: var(--color-medium-gray);
-    margin: var(--spacing-xxs) 0;
   }
 </style>

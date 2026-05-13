@@ -22,6 +22,7 @@ USAGE EXAMPLE:
   import Pubdate from './Pubdate.svelte';
 
   let {
+    category = '', // NEW: Topic/category label
     headline, // Required: The main title of the article
     kicker = '', // Optional: Eyebrow label rendered above the headline
     byline = '', // Optional: The author's name(s)
@@ -30,8 +31,13 @@ USAGE EXAMPLE:
 </script>
 
 <header class="article-header">
-  <Kicker text={kicker} />
+  {#if category}
+    <div class="category">
+      {category}
+    </div>
+  {/if}
   <Headline text={headline} />
+  <Kicker text={kicker} />
 
   {#if byline || pubDate}
     <div class="meta">
@@ -95,35 +101,58 @@ USAGE EXAMPLE:
   {/if}
 </header>
 
-<style lang="scss">
+ <style lang="scss">
   @use '../../styles' as *;
 
   .article-header {
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .category {
+    display: inline-block;
+
+    margin-bottom: var(--spacing-sm);
+    padding: 0.35rem 0.75rem;
+
+    background: black;
+    color: white;
+
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    line-height: 1;
+
+    border-radius: 2px;
   }
 
   .meta {
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: var(--spacing-xs);
-    padding: var(--font-size-xs) var(--spacing-sm);
-    border-left: var(--border-width-accent) solid var(--color-accent);
-    background-color: var(--color-light-gray);
+    
   }
 
   .meta-item {
-    display: inline-flex;
+    display: flex;
     align-items: center;
+    justify-content: center;
     gap: var(--spacing-xs);
   }
 
   .meta-icon {
-    color: var(--color-accent);
+    color: var(--color-dark);
     flex-shrink: 0;
   }
 
-  /* Override Byline styles inside the meta box */
+  /* Byline styling */
   .meta-byline :global(.byline) {
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-medium);
@@ -131,24 +160,16 @@ USAGE EXAMPLE:
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-wide);
     margin: 0;
+    text-align: center;
   }
 
-  /* Override Pubdate styles inside the meta box */
+  /* Pubdate styling */
   .meta-date :global(.pubdate) {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-xs);
     color: var(--color-medium-gray);
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-wide);
     margin: 0;
-  }
-
-  /* Tablet and up: inline meta */
-  @include tablet {
-    .meta {
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: var(--spacing-sm);
-    }
+    text-align: center;
   }
 </style>

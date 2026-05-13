@@ -22,12 +22,14 @@ USAGE EXAMPLE:
   @use '../../styles' as *;
 
   .headline {
-    font-family: var(--font-serif);
+    font-family: var(--font-sans);
     font-size: var(--font-size-5xl);
     font-weight: var(--font-weight-bold);
     line-height: var(--leading-tight);
     color: var(--color-dark);
     margin-bottom: var(--spacing-sm);
+    letter-spacing: var(--letter-spacing-tight);
+    
 
     @include tablet {
       font-size: var(--font-size-6xl);

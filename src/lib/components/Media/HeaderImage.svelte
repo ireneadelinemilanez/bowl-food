@@ -9,10 +9,10 @@ Ideal for article hero images, landing banners, and feature headers.
 
 USAGE EXAMPLE:
 <HeaderImage
-  src="/photos/city-skyline.jpg"
-  alt="New York City skyline at sunrise"
-  height="100vh"
-  overlay={true}
+  src="/images/city-hall.jpg"
+  alt="City Hall building at sunset"
+  caption="City Hall, where the budget vote took place Tuesday evening."
+  credit="Jane Smith / The Daily News"
 >
   <h1>Housing Costs Continue to Rise</h1>
 </HeaderImage>
@@ -25,7 +25,8 @@ USAGE EXAMPLE:
     src, // Required: Image source URL
     alt, // Required: Alt text for accessibility
     height = '100vh', // Height of the header section
-    overlay = false, // Optional dark overlay
+    caption = '', // Optional: Caption text below image
+    credit = '', // Optional: Photo credit
   } = $props();
 
   // Resolve local images using asset()
@@ -34,72 +35,76 @@ USAGE EXAMPLE:
   );
 </script>
 
-<section
-  class="header-image"
-  style={`height: ${height};`}
->
-  <img
-    src={resolvedSrc}
-    {alt}
-    class="background-image"
-  />
-
-  {#if overlay}
-    <div class="overlay"></div>
-  {/if}
-
-  <div class="content">
-    <slot />
+<section class="header-wrapper">
+  <div
+    class="header-image"
+    style={`height: ${height};`}
+  >
+    <img
+      src={resolvedSrc}
+      {alt}
+      class="background-image"
+    />
   </div>
+
+  {#if caption || credit}
+    <figcaption class="caption-container">
+      {#if caption}
+        <span class="caption">{caption}</span>
+      {/if}
+
+      {#if credit}
+        <span class="credit">{credit}</span>
+      {/if}
+    </figcaption>
+  {/if}
 </section>
 
-<style lang="scss">
+ <style lang="scss">
   @use '../../styles' as *;
+
+  .header-wrapper {
+    width: 100%;
+    margin-bottom: var(--spacing-2xl);
+  }
 
   .header-image {
     position: relative;
-    width: 100vw;
+    width: 100%;
     overflow: hidden;
-
-    // Makes image stretch edge-to-edge
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
   }
 
   .background-image {
-    position: absolute;
-    inset: 0;
-
     width: 100%;
     height: 100%;
-
-    // Prevents distortion and crops image instead
     object-fit: cover;
-    object-position: center;
-
     display: block;
   }
 
-  .overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.35);
-    z-index: 1;
-  }
-
-  .content {
-    position: relative;
-    z-index: 2;
-
+  .caption-container {
     width: 100%;
-    height: 100%;
+    max-width: var(--max-width-content);
+
+    margin: var(--spacing-sm) auto 0 auto;
+
+    padding: 0 var(--spacing-lg);
 
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    gap: 0.15rem;
 
-    padding: var(--spacing-lg);
-    text-align: center;
-    color: white;
+    box-sizing: border-box;
+  }
+
+  .caption {
+    font-size: var(--font-size-sm);
+    line-height: var(--leading-caption);
+    color: var(--color-text);
+  }
+
+  .credit {
+    font-size: var(--font-size-xs);
+    color: var(--color-medium-gray);
+    font-style: italic;
   }
 </style>

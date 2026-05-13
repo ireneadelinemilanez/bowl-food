@@ -134,7 +134,7 @@ This is your page!
 );
 
   // Article metadata
-  let headline = 'Slop bowls soar in price, outpacing income and inflation';
+  let headline = '"Slop bowls" soar in price, outpacing income and inflation';
   let byline = 'Irene Adeline Milanez';
   let pubDate = '2026-01-31';
 </script>
@@ -148,19 +148,25 @@ This is your page!
   />
 </svelte:head>
 
+<div class="container">
+<ArticleHeader
+  category="Economy"
+  headline={headline}
+  byline={byline}
+  pubDate={pubDate}
+  />
+</div>  
+
 <!-- Your page content goes here -->
 <HeaderImage
   src="bowl.jpeg"
   alt="New York City skyline at sunrise"
   height="100vh"
+  credit="Photo Illustration / Irene Adeline Milanez, Photo / Loren Castillo"
   >
 </HeaderImage>
 
 <div class="container">
-  <!-- Article Header: Headline, byline, and publication date -->
-
-  <ArticleHeader {headline} {byline} {pubDate} />  
-
   <!-- Article Body: The main story text with proper typography -->
   <ArticleBody>
     <p class="dropcap">

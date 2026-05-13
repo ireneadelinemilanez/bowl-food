@@ -58,7 +58,7 @@ USAGE EXAMPLE:
 
   /* Mobile-first: smaller text */
   .article-body {
-    font-family: var(--font-sans);
+    font-family: var(--font-serif);
     font-size: var(--font-size-base);
     line-height: var(--leading-relaxed);
     color: var(--color-text);
@@ -137,19 +137,10 @@ USAGE EXAMPLE:
     line-height: var(--dropcap-line-height);
     float: left;
     margin-right: var(--dropcap-margin-right);
-    /* Animated gradient matching the site header */
-    background: linear-gradient(
-      90deg,
-      var(--color-cuny-blue-dark) 0%,
-      var(--color-accent) 50%,
-      var(--color-cuny-blue-light) 100%
-    );
     background-size: 200% 100%;
     -webkit-background-clip: text;
     background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: var(--dropcap-color);
-    animation: dropcap-gradient 6s ease-in-out infinite;
+    -webkit-text-fill-color: var(--color-accent);
   }
 
   /* Strong/Bold text */

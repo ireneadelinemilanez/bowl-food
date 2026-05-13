@@ -32,8 +32,8 @@ export function load() {
   const years = Object.values(dataByYear).sort((a, b) => a.year - b.year);
 
   return {
-    showHeader: false,
-    showFooter: false,
+    showHeader: true,
+    showFooter: true,
     dataByYear: years,
   };
 }

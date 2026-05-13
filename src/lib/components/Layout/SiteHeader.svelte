@@ -48,8 +48,8 @@ SiteHeader.svelte — NYCity News Service Style Header
       >
         <!-- Compact HTML/CSS Logo with thin white border -->
         <span class="logo-text">
-          <span class="logo-nycity">NYCITY</span><span class="logo-news-service"
-            >News Service</span
+          <span class="logo-news-service"
+            >ang sarap!</span
           >
         </span>
       </a>
@@ -80,14 +80,7 @@ SiteHeader.svelte — NYCity News Service Style Header
 
   /* Full-width blue background with animated dark-to-light gradient */
   .masthead-wrapper {
-    background: linear-gradient(
-      90deg,
-      var(--color-cuny-blue-dark) 0%,
-      var(--color-accent) 50%,
-      var(--color-cuny-blue-light) 100%
-    );
-    background-size: 200% 100%;
-    animation: gradient-sweep 6s ease-in-out infinite;
+    background: var(--color-dark);
   }
 
   @keyframes gradient-sweep {
@@ -124,14 +117,13 @@ SiteHeader.svelte — NYCity News Service Style Header
   .logo-text {
     display: inline-flex;
     align-items: stretch;
-    border: 1px solid var(--color-white);
   }
 
   .logo-nycity {
     background-color: var(--color-white);
     color: var(--color-accent);
     font-family: var(--font-sans);
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-base);
     font-weight: var(--font-weight-extrabold);
     padding: var(--logo-padding-mobile);
     letter-spacing: var(--letter-spacing-wide);
@@ -142,9 +134,9 @@ SiteHeader.svelte — NYCity News Service Style Header
 
   .logo-news-service {
     color: var(--color-white);
-    font-family: var(--font-sans);
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-light);
+    font-family: var(--font-serif);
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-extrabold);
     padding: var(--logo-padding-mobile);
     letter-spacing: var(--letter-spacing-tight);
     display: flex;
