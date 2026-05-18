@@ -36,15 +36,8 @@ USAGE EXAMPLE:
 </script>
 
 <section class="header-wrapper">
-  <div
-    class="header-image"
-    style={`height: ${height};`}
-  >
-    <img
-      src={resolvedSrc}
-      {alt}
-      class="background-image"
-    />
+  <div class="header-image" style={`height: ${height};`}>
+    <img src={resolvedSrc} {alt} class="background-image" />
   </div>
 
   {#if caption || credit}
@@ -60,7 +53,7 @@ USAGE EXAMPLE:
   {/if}
 </section>
 
- <style lang="scss">
+<style lang="scss">
   @use '../../styles' as *;
 
   .header-wrapper {

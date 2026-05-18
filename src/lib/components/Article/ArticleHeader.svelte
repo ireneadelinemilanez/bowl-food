@@ -107,7 +107,7 @@ USAGE EXAMPLE:
   {/if}
 </header>
 
- <style lang="scss">
+<style lang="scss">
   @use '../../styles' as *;
 
   .article-header {
@@ -143,7 +143,6 @@ USAGE EXAMPLE:
     flex-direction: column;
     align-items: center;
     gap: var(--spacing-xs);
-    
   }
 
   .meta-item {
@@ -180,15 +179,15 @@ USAGE EXAMPLE:
   }
 
   .subhead {
-  max-width: 36rem;
-  margin: var(--spacing-sm) 0 var(--spacing-sm);
+    max-width: 36rem;
+    margin: var(--spacing-sm) 0 var(--spacing-sm);
 
-  font-family: var(--font-serif);
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-normal);
-  line-height: var(--leading-relaxed);
+    font-family: var(--font-serif);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--leading-relaxed);
 
-  color: var(--color-dark);
-  text-align: center;
+    color: var(--color-dark);
+    text-align: center;
   }
 </style>

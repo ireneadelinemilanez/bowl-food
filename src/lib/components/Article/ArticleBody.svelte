@@ -75,7 +75,7 @@ USAGE EXAMPLE:
 
   /* Links within article body */
   .article-body :global(a) {
-    color: var(--color-dark);
+    color: var(--color-accent);
     text-decoration: underline;
     text-underline-offset: 2px;
   }
@@ -131,7 +131,7 @@ USAGE EXAMPLE:
 
   /* Dropcap: apply class="dropcap" to the opening <p> */
   .article-body :global(p.dropcap > .dropcap-letter) {
-    font-family: var(--font-serif);
+    font-family: var(--font-sans);
     font-size: var(--dropcap-font-size);
     font-weight: var(--font-weight-bold);
     line-height: var(--dropcap-line-height);
@@ -140,7 +140,7 @@ USAGE EXAMPLE:
     background-size: 200% 100%;
     -webkit-background-clip: text;
     background-clip: text;
-    -webkit-text-fill-color: var(--color-accent);
+    -webkit-text-fill-color: var(--color-dark);
   }
 
   /* Strong/Bold text */

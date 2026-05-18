@@ -11,44 +11,44 @@ USAGE EXAMPLE:
 <script>
   let {
     navLinks = [
-      {
+     {
         label: 'Restaurants',
-        href: 'https://www.nycitynewsservice.com/nycns_topics/arts-culture/',
+        href: 'https://ireneadelinemilanez.com/clips/restaurant-costs',
       },
       {
         label: 'Drinks',
-        href: 'https://www.nycitynewsservice.com/nycns_topics/business/',
+        href: 'https://ireneadelinemilanez.com/clips/coffee',
       },
       {
         label: 'Culture',
-        href: 'https://www.nycitynewsservice.com/nycns_topics/education/',
+        href: 'https://ireneadelinemilanez.com/clips/tacos',
       },
       {
         label: 'Economy',
-        href: 'https://www.nycitynewsservice.com/nycns_topics/environment/',
+        href: 'https://ireneadelinemilanez.com/clips/mutual-aids',
       },
       {
         label: 'Business',
-        href: 'https://www.nycitynewsservice.com/nycns_topics/health/',
+        href: 'https://ireneadelinemilanez.com/clips/cannabis',
       },
       {
         label: 'Video',
-        href: 'https://www.nycitynewsservice.com/nycns_topics/housing/',
+        href: 'https://www.instagram.com/byireneadeline',
       },
     ],
     aboutLinks = [
       {
         label: 'About Us',
-        href: 'https://www.nycitynewsservice.com/about/',
+        href:  'https://ireneadelinemilanez.com/',
       },
       {
         label: 'Contact Us',
-        href: 'https://www.nycitynewsservice.com/contact/',
+        href:  'https://linkedin.com/in/irene-adeline-milanez',
       },
     ],
-    logoHref = 'https://www.journalism.cuny.edu/',
-    logoAriaLabel = 'Visit the Craig Newmark Graduate School of Journalism website',
-    logoTitle = 'Craig Newmark Graduate School of Journalism at CUNY',
+    logoHref = 'https://ireneadelinemilanez.com/',
+    logoAriaLabel = 'Visit My Website',
+    logoTitle = 'Irene Adeline Milanez',
     tagline = 'All things food, economy and culture.',
     orgName = 'ang sarap!',
   } = $props();
@@ -109,20 +109,21 @@ USAGE EXAMPLE:
               </ul>
             </nav>
           </div>
-              {/if}
-            </div>
-          </div>
-        </div>
+        {/if}
+      </div>
+    </div>
+  </div>
 
-        <!-- Bottom copyright bar -->
-        <div class="footer-bottom">
-          <div class="footer-container">
-            <p class="footer-copyright">
-              &copy; {currentYear} {orgName}
-            </p>
-          </div>
-        </div>
-      </footer>
+  <!-- Bottom copyright bar -->
+  <div class="footer-bottom">
+    <div class="footer-container">
+      <p class="footer-copyright">
+        &copy; {currentYear}
+        {orgName}
+      </p>
+    </div>
+  </div>
+</footer>
 
 <style lang="scss">
   @use '../../styles' as *;
@@ -227,7 +228,7 @@ USAGE EXAMPLE:
   }
 
   .footer-link:hover {
-    color: var(--color-white);
+    color: var(--color-accent);
   }
 
   /* Bottom copyright bar */

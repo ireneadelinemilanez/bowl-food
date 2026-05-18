@@ -80,7 +80,7 @@ of an article.
   .methodology-body :global(li) {
     margin-bottom: 0.25rem;
     line-height: var(--leading-relaxed);
-}
+  }
 
   .methodology-body :global(li:last-child) {
     margin-bottom: 0;

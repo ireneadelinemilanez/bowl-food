@@ -7,27 +7,27 @@ SiteHeader.svelte — NYCity News Service Style Header
     navLinks = [
       {
         label: 'Restaurants',
-        href: 'https://www.nycitynewsservice.com/nycns_topics/arts-culture/',
+        href: 'https://ireneadelinemilanez.com/clips/restaurant-costs',
       },
       {
         label: 'Drinks',
-        href: 'https://www.nycitynewsservice.com/nycns_topics/business/',
+        href: 'https://ireneadelinemilanez.com/clips/coffee',
       },
       {
         label: 'Culture',
-        href: 'https://www.nycitynewsservice.com/nycns_topics/education/',
+        href: 'https://ireneadelinemilanez.com/clips/tacos',
       },
       {
         label: 'Economy',
-        href: 'https://www.nycitynewsservice.com/nycns_topics/environment/',
+        href: 'https://ireneadelinemilanez.com/clips/mutual-aids',
       },
       {
         label: 'Business',
-        href: 'https://www.nycitynewsservice.com/nycns_topics/health/',
+        href: 'https://ireneadelinemilanez.com/clips/cannabis',
       },
       {
         label: 'Video',
-        href: 'https://www.nycitynewsservice.com/nycns_topics/housing/',
+        href: 'https://www.instagram.com/byireneadeline',
       },
     ],
   } = $props();
@@ -38,15 +38,13 @@ SiteHeader.svelte — NYCity News Service Style Header
   <div class="masthead-wrapper">
     <div class="masthead">
       <a
-        href="https://www.nycitynewsservice.com/"
+        href="https://ireneadelinemilanez.com/,"
         class="logo"
-        aria-label="NYCity News Service"
+        aria-label="Irene Adeline Milanez"
       >
         <!-- Compact HTML/CSS Logo with thin white border -->
         <span class="logo-text">
-          <span class="logo-news-service"
-            >ang sarap!</span
-          >
+          <span class="logo-news-service">ang sarap!</span>
         </span>
       </a>
 
@@ -73,22 +71,8 @@ SiteHeader.svelte — NYCity News Service Style Header
     border-bottom: 0px solid var(--color-accent);
     box-shadow: 0 2px 4px var(--color-shadow);
   }
-
-  /* Full-width blue background with animated dark-to-light gradient */
   .masthead-wrapper {
     background: var(--color-dark);
-  }
-
-  @keyframes gradient-sweep {
-    0% {
-      background-position: 0% 0%;
-    }
-    50% {
-      background-position: 100% 0%;
-    }
-    100% {
-      background-position: 0% 0%;
-    }
   }
 
   /* Compact Masthead - Mobile: centered */
@@ -166,7 +150,7 @@ SiteHeader.svelte — NYCity News Service Style Header
   }
 
   .nav-link:hover {
-    color: var(--color-white);
+    color: var(--color-accent);
     opacity: var(--opacity-hover);
     text-decoration: none;
   }

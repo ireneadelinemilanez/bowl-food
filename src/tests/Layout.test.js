@@ -32,8 +32,8 @@ describe('SiteHeader', () => {
   });
 });
 
-  it('renders footer navigation links', () => {
-    render(SiteFooter);
-    expect(screen.getByText('ABOUT US')).toBeTruthy();
-    expect(screen.getByText('CONTACT US')).toBeTruthy();
-  });
+it('renders footer navigation links', () => {
+  render(SiteFooter);
+  expect(screen.getByText('ABOUT US')).toBeTruthy();
+  expect(screen.getByText('CONTACT US')).toBeTruthy();
+});
