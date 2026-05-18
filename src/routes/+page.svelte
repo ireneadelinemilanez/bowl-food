@@ -90,15 +90,15 @@ This is your page!
   // Article metadata
   let headline = '"Slop bowls" soar in price, outpacing income and inflation';
   let byline = 'Irene Adeline Milanez';
-  let pubDate = '2026-01-31';
+  let pubDate = '2026-05-18';
 </script>
 
 <!-- This sets the page title in the browser tab -->
 <svelte:head>
-  <title>{headline} | NYCity News Service</title>
+  <title>{headline} | aang sarap!</title>
   <meta
     name="description"
-    content="At the Craig Newmark Graduate School of Journalism at the City University of New York, change is in our DNA. That comes of being born in 2006, as the digital revolution was transforming our profession in ways none of us could have imagined."
+    content="Consumers strained by rising prices and economic uncertainty are cutting back on takeout lunches, particularly at fast casual chains like Chipotle, Sweetgreen and Cava."
   />
 </svelte:head>
 
@@ -115,7 +115,7 @@ This is your page!
 <!-- Your page content goes here -->
 <HeaderImage
   src="bowl.jpeg"
-  alt="New York City skyline at sunrise"
+  alt="Money pours into fast casual bowl"
   height="100vh"
   caption="Consumers strained by rising prices and economic uncertainty are cutting back on takeout lunches at fast casual chains like Chipotle, Sweetgreen and Cava."
   credit="Photo Illustration / Irene Adeline Milanez, Photo / Loren Castillo"
@@ -180,10 +180,10 @@ This is your page!
         <table class="price-table">
           <thead>
             <tr>
-              <th>Restaurant</th>
+              <th>RESTAURANT</th>
               <th>2018</th>
               <th>{selectedYear}</th>
-              <th>Increase</th>
+              <th>INCREASE</th>
             </tr>
           </thead>
           <tbody>
