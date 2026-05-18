@@ -6,32 +6,28 @@ SiteHeader.svelte — NYCity News Service Style Header
   let {
     navLinks = [
       {
-        label: 'Arts & Culture',
+        label: 'Restaurants',
         href: 'https://www.nycitynewsservice.com/nycns_topics/arts-culture/',
       },
       {
-        label: 'Business',
+        label: 'Drinks',
         href: 'https://www.nycitynewsservice.com/nycns_topics/business/',
       },
       {
-        label: 'Education',
+        label: 'Culture',
         href: 'https://www.nycitynewsservice.com/nycns_topics/education/',
       },
       {
-        label: 'Environment',
+        label: 'Economy',
         href: 'https://www.nycitynewsservice.com/nycns_topics/environment/',
       },
       {
-        label: 'Health',
+        label: 'Business',
         href: 'https://www.nycitynewsservice.com/nycns_topics/health/',
       },
       {
-        label: 'Housing',
+        label: 'Video',
         href: 'https://www.nycitynewsservice.com/nycns_topics/housing/',
-      },
-      {
-        label: 'Politics',
-        href: 'https://www.nycitynewsservice.com/nycns_topics/politics/',
       },
     ],
   } = $props();

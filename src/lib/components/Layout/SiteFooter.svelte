@@ -12,32 +12,28 @@ USAGE EXAMPLE:
   let {
     navLinks = [
       {
-        label: 'Arts & Culture',
+        label: 'Restaurants',
         href: 'https://www.nycitynewsservice.com/nycns_topics/arts-culture/',
       },
       {
-        label: 'Business',
+        label: 'Drinks',
         href: 'https://www.nycitynewsservice.com/nycns_topics/business/',
       },
       {
-        label: 'Education',
+        label: 'Culture',
         href: 'https://www.nycitynewsservice.com/nycns_topics/education/',
       },
       {
-        label: 'Environment',
+        label: 'Economy',
         href: 'https://www.nycitynewsservice.com/nycns_topics/environment/',
       },
       {
-        label: 'Health',
+        label: 'Business',
         href: 'https://www.nycitynewsservice.com/nycns_topics/health/',
       },
       {
-        label: 'Housing',
+        label: 'Video',
         href: 'https://www.nycitynewsservice.com/nycns_topics/housing/',
-      },
-      {
-        label: 'Politics',
-        href: 'https://www.nycitynewsservice.com/nycns_topics/politics/',
       },
     ],
     aboutLinks = [
@@ -71,23 +67,25 @@ USAGE EXAMPLE:
             class="footer-logo-link"
             aria-label={logoAriaLabel}
           >
-          <h1>{orgName}</h1>
+            <h1>{orgName}</h1>
 
-          <p class="footer-tagline">
-            {tagline}
-          </p>
+            <p class="footer-tagline">
+              {tagline}
+            </p>
+          </a>
         </div>
 
         <!-- Navigation Column -->
         <div class="footer-col">
           <h3 class="footer-heading">ABOUT</h3>
+
           <nav aria-label="Footer navigation">
             <ul class="footer-list">
               {#each aboutLinks as link (link.href)}
                 <li>
-                  <a href={link.href} class="footer-link"
-                    >{link.label.toUpperCase()}</a
-                  >
+                  <a href={link.href} class="footer-link">
+                    {link.label.toUpperCase()}
+                  </a>
                 </li>
               {/each}
             </ul>
@@ -98,33 +96,33 @@ USAGE EXAMPLE:
         {#if navLinks.length > 0}
           <div class="footer-col">
             <h3 class="footer-heading">TOPICS</h3>
+
             <nav aria-label="Footer topics">
               <ul class="footer-list">
                 {#each navLinks as link (link.href)}
                   <li>
-                    <a href={link.href} class="footer-link"
-                      >{link.label.toUpperCase()}</a
-                    >
+                    <a href={link.href} class="footer-link">
+                      {link.label.toUpperCase()}
+                    </a>
                   </li>
                 {/each}
               </ul>
             </nav>
           </div>
-        {/if}
-      </div>
-    </div>
-  </div>
+              {/if}
+            </div>
+          </div>
+        </div>
 
-  <!-- Bottom bar with copyright -->
-  <div class="footer-bottom">
-    <div class="footer-container">
-      <p class="footer-copyright">
-        &copy; {currentYear}
-        {orgName}
-      </p>
-    </div>
-  </div>
-</footer>
+        <!-- Bottom copyright bar -->
+        <div class="footer-bottom">
+          <div class="footer-container">
+            <p class="footer-copyright">
+              &copy; {currentYear} {orgName}
+            </p>
+          </div>
+        </div>
+      </footer>
 
 <style lang="scss">
   @use '../../styles' as *;
@@ -162,6 +160,8 @@ USAGE EXAMPLE:
     padding: var(--logo-padding-mobile);
     letter-spacing: var(--letter-spacing-tight);
     display: flex;
+    margin: 0;
+    padding: 0;
   }
 
   .footer-logo-link {

@@ -70,4 +70,19 @@ of an article.
       font-size: var(--font-size-base);
     }
   }
+
+  .methodology-body :global(ul),
+  .methodology-body :global(ol) {
+    margin: var(--spacing-xs) 0;
+    padding-left: 1.5rem;
+  }
+
+  .methodology-body :global(li) {
+    margin-bottom: 0.25rem;
+    line-height: var(--leading-relaxed);
+}
+
+  .methodology-body :global(li:last-child) {
+    margin-bottom: 0;
+  }
 </style>

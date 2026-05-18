@@ -24,6 +24,7 @@ USAGE EXAMPLE:
   let {
     category = '', // NEW: Topic/category label
     headline, // Required: The main title of the article
+    subhead = '', // NEW
     kicker = '', // Optional: Eyebrow label rendered above the headline
     byline = '', // Optional: The author's name(s)
     pubDate = '', // Optional: Publication date in YYYY-MM-DD format
@@ -37,6 +38,11 @@ USAGE EXAMPLE:
     </div>
   {/if}
   <Headline text={headline} />
+
+  {#if subhead}
+    <p class="subhead">{subhead}</p>
+  {/if}
+
   <Kicker text={kicker} />
 
   {#if byline || pubDate}
@@ -105,7 +111,7 @@ USAGE EXAMPLE:
   @use '../../styles' as *;
 
   .article-header {
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -171,5 +177,18 @@ USAGE EXAMPLE:
     letter-spacing: var(--letter-spacing-wide);
     margin: 0;
     text-align: center;
+  }
+
+  .subhead {
+  max-width: 36rem;
+  margin: var(--spacing-sm) 0 var(--spacing-sm);
+
+  font-family: var(--font-serif);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--leading-relaxed);
+
+  color: var(--color-dark);
+  text-align: center;
   }
 </style>

@@ -27,7 +27,7 @@ USAGE EXAMPLE:
     font-weight: var(--font-weight-bold);
     line-height: var(--leading-tight);
     color: var(--color-dark);
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
     letter-spacing: var(--letter-spacing-tight);
     
 
