@@ -400,18 +400,14 @@ This is your page!
   @use '$lib/styles' as *;
 
   .chart-wrapper {
-  border: 2pt solid var(--color-accent);
-  border-radius: var(--border-radius-md);
-  padding: var(--spacing-md);
   margin: var(--spacing-lg) 0;
-  background: white;
 }
 
 
   .metrics-section {
   margin: var(--spacing-lg) 0;
   padding: var(--spacing-sm) var(--spacing-md) var(--spacing-md);
-  border: 2pt solid var(--color-accent);
+  background: var(--color-light-gray);
   border-radius: var(--border-radius-md);
 
   h2 {
